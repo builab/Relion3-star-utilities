@@ -2,7 +2,7 @@
 A collection of star file utilities for Relion 3.0
 
 
-#relion3_micrograph_add_beamtiltclass.py
+# relion3_micrograph_add_beamtiltclass.py
 Convert the beam tilt file name pattern to beam tilt class for Polishing
 McGill Krios beam tilt pattern
   xxx_micrographNo_HoleId_ShotID.tif
