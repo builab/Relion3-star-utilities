@@ -8,12 +8,12 @@ McGill Krios beam tilt pattern
   xxx_micrographNo_HoleId_ShotID.tif
   E.g. Micro_00000_1_1.tif, Micro_00003_1_3.tif, Micro_00010_3_2.tif
 
-python relion3_micrograph_add_beamtiltclass.py --i micrographs_ctf.star --o micrographs_ctf_beamtiltclass.star --holeno 4
+$python relion3_micrograph_add_beamtiltclass.py --i micrographs_ctf.star --o micrographs_ctf_beamtiltclass.star --holeno 4
 
 # plot_beamtilt_class.py
 Plot the beam tilt estimation from CtfRefine
 
-python plot_beamtilt_class.py beamtilt_iter-fit_class_*.txt
+$python plot_beamtilt_class.py beamtilt_iter-fit_class_*.txt
 
 Output: beamtilt_class.png
 
