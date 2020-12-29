@@ -10,6 +10,13 @@ McGill Krios beam tilt pattern
 
 python relion3_micrograph_add_beamtiltclass.py --i micrographs_ctf.star --o micrographs_ctf_beamtiltclass.star --holeno 4
 
+# plot_beamtilt_class.py
+Plot the beam tilt estimation from CtfRefine
+
+python plot_beamtilt_class.py beamtilt_iter-fit_class_*.txt
+
+Output: beamtilt_class.png
+
 
 
 
