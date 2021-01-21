@@ -142,11 +142,13 @@ if __name__=='__main__':
 				#print(" microname ", micronum)
 				if micronum > 1:
 					if len(helicalrecord) >= minpart:
+						totalpartafter = totalpartafter + len(helicalrecord)
 						writestarblock(outstar, helicalrecord)
 					else:
 						print ('Eliminate MT{:s} of {:s} with {:d} particles'.format(prevhelicalid, microname, len(helicalrecord)))
  
 					# Write out
+					totalpart = totalpart + len(helicalrecord)
 					helicalrecord = []
 					
 				micronum += 1
