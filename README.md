@@ -20,10 +20,19 @@ $python plot_beamtilt_class.py beamtilt_iter-fit_class_*.txt
 
 Output: beamtilt_class.png
 
-#relion3_0_filter_short_microtubules.py
+# relion3_0_filter_short_microtubules.py
 Filtering out microtubules with less particles than a threshold
 
 $relion3_0_filter_short_microtubules.py --istar particles.star --ostar particles_filtered.star --minpart 10
 
+
+# relion3_0_plot_microtubule_alignment.py
+Ploting out Phi, Psi, Theta & Shifts for visualization of accurate alignment
+
+$relion3_0_plot_microtubule_alignment.py --istar particles.star --im fit --minpart 10
+
+--im directory to output the graphic
+
+Output: angle plot for each microtubule
 
 
