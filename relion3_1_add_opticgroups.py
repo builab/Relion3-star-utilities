@@ -3,7 +3,7 @@
 
 """
 Created on Sat Jun  6 17:35:42 2020
-WARNING: THis script is very preliminart for Relion 3.1, might now work very well if format changes.
+WARNING: THis script is very preliminary for Relion 3.1, might not work very well if format changes.
 
 Clone more OpticGroups to the star file based on hole name pattern
 for Polishing in group later.
@@ -116,7 +116,7 @@ def writestarblock(outfile,recordblock):
 	
 if __name__=='__main__':
 	# get name of input starfile, output starfile, output stack file
-	print('WARNING: Only compatible with Relion 3.1 data optics star file')
+	print('WARNING: Only compatible with Relion 3.1 star file')
 	
 	parser = argparse.ArgumentParser(description='')
 	parser.add_argument('--istar', help='Input particle star file',required=True)
