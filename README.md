@@ -11,7 +11,7 @@ McGill Krios beam tilt pattern
  
   E.g. Micro_00000_1-1.tif, Micro_00003_1-3.tif, Micro_00010_3-2.tif
 
-$python relion3_micrograph_add_beamtiltclass.py --istar micrographs_ctf.star --ostar micrographs_ctf_beamtiltclass.star --holeno 4
+$python relion3_add_beamtiltclass.py --istar micrographs_ctf.star --ostar micrographs_ctf_beamtiltclass.star --holeno 4
 
 # relion3_1_add_opticgroups.py
 Similar to relion3_add_beamtiltclass.py but now is used for relion 3.1 to accomodate data_optics table.
