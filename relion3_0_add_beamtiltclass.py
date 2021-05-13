@@ -80,6 +80,8 @@ if __name__=='__main__':
 	parser.add_argument('--istar', help='Input particle star file',required=True)
 	parser.add_argument('--ostar', help='Output particle star file',required=True)
 	parser.add_argument('--holeno', help='Number of holes used for beam shift',required=True)
+	parser.add_argument('--offset', help='Add this offset to the beam tilt class',required=False, default="0")
+
 
 
 	args = parser.parse_args()
@@ -88,6 +90,7 @@ if __name__=='__main__':
 	instar = open(args.istar, 'r')
 	outstar= open(args.ostar, 'w')
 	holeno = float(args.holeno)
+	offset = int(args.offset)
 
 		
 	
@@ -115,7 +118,7 @@ if __name__=='__main__':
 			shotid = int(m.group(2))
 			
 			# Append the rlnBeamTiltClass
-			record.append(str(holeno*(holeid - 1) + shotid))
+			record.append(str(holeno*(holeid - 1) + shotid + offset))
 			writestarline(outstar,record)
 					
 
