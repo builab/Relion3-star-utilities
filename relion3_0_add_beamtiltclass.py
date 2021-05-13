@@ -118,7 +118,7 @@ if __name__=='__main__':
 			shotid = int(m.group(2))
 			
 			# Append the rlnBeamTiltClass
-			record.append("{0:.0f}".format((holeno*(holeid - 1) + shotid + offset))
+			record.append("{0:.0f}".format(holeno*(holeid - 1) + shotid + offset))
 			writestarline(outstar,record)
 					
 
