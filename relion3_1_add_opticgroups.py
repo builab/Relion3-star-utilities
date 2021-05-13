@@ -123,6 +123,8 @@ if __name__=='__main__':
 	parser.add_argument('--ostar', help='Output particle star file',required=True)
 	parser.add_argument('--nogroup', help='Number of OpticGroup used for beam shift',required=True)
 	parser.add_argument('--pattern', help='Hole pattern',required=False,default="_(\d+-\d+).mrc")
+	parser.add_argument('--offset', help='Add this offset to the beam tilt class',required=False, default="0")
+
 
 
 	args = parser.parse_args()
@@ -132,6 +134,8 @@ if __name__=='__main__':
 	outstar= open(args.ostar, 'w')
 	nogroup = int(args.nogroup)
 	searchpattern = args.pattern
+	offset = int(args.offset)
+
 		
 	# Parse data_optics
 	staropticslabels = learnstaropticsheader(instar)
@@ -151,8 +155,8 @@ if __name__=='__main__':
 		if len(record)==len(staropticslabels): # if line looks valid
 			# Replicate Record nogroup time 
 			for groupid in range(nogroup):
-				record[opticsgroupnamecol]= 'opticsGroup' + str(groupid + 1)
-				record[opticsgroupcol] = str(groupid + 1)
+				record[opticsgroupnamecol]= 'opticsGroup' + str(groupid + 1 + offset)
+				record[opticsgroupcol] = str(groupid + 1 + offset)
 				writestarline(outstar,record)
 					
 	outstar.write('\n')
@@ -180,7 +184,7 @@ if __name__=='__main__':
                         if holepattern.get(m.group(1)):
                                 record[partopticsgroupcol] = holepattern.get(m.group(1))
                         else:
-                                opticsgroupid = opticsgroupid + 1
+                                opticsgroupid = opticsgroupid + 1 + offset
                                 holepattern[m.group(1)] = "{0:.0f}".format(opticsgroupid)
                                 record[partopticsgroupcol] = holepattern.get(m.group(1))
                         
@@ -191,6 +195,8 @@ if __name__=='__main__':
         outstar.close()
 
         # Report
+	print("Writing " + args.ostar + " successfully!")
+
         print('Optic groups identified')
         for pattern in holepattern.keys():
                 print("\tPattern {0} - OpticsGroup {1}".format(pattern, holepattern.get(pattern)))
