@@ -125,3 +125,5 @@ if __name__=='__main__':
 			
 	instar.close()
 	outstar.close()
+	
+	print("Writing " + args.ostar " successfully")
