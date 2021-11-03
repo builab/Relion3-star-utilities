@@ -75,8 +75,8 @@ if __name__=='__main__':
 				df_out = df_out.append(df2)		
 			del(df2)
 		#print(df_out)
-		df_out['rlnCoordinateX'] = df_out['rlnCoordinateX']*2
-		df_out['rlnCoordinateY'] = df_out['rlnCoordinateY']*2
+		df_out['rlnCoordinateX'] = df_out['rlnCoordinateX']*binfactor
+		df_out['rlnCoordinateY'] = df_out['rlnCoordinateY']*binfactor
 
 		write_star_3_1(df_out.drop(['Box_X', 'Box_Y'], axis=1), args.odir + '/' + name + '.star')
 		
