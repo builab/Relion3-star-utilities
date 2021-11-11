@@ -27,7 +27,7 @@ McGill Krios pattern HoleNumber_ShotNumber
 import os, argparse, os.path, re
 
 def learnstaropticsheader(infile):
-	"""Learn which column contains which information from an already open starfile"""
+"""Learn which column contains which information from an already open starfile"""
 	infile.seek(0) # Go to the beginning of the starfile
 	doneopticsheader = False
 	doneprelabels = False
@@ -53,13 +53,13 @@ def learnstaropticsheader(infile):
 	return opticsheaderlabels
 
 def writestaropticsheader(outfile,headerlabels):			
-	"""With an already opened starfile write a header"""
+"""With an already opened starfile write a header"""
 	outfile.write('\ndata_optics\n\nloop_\n')
 	for label in headerlabels:
 		outfile.write(label)
 
 def learnstarpartheader(infile):
-	 """Learn which column contains which information from an already open starfile"""
+"""Learn which column contains which information from an already open starfile"""
 	infile.seek(0)
 	donepartheader = False
 	doneprelabels = False
