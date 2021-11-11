@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Created on Sat Jun  6 17:35:42 2020
+Created on Sat Jun	6 17:35:42 2020
 
 WARNING: THis script is very preliminary for Relion 3.1, might not work very well if format changes.
 Also, this script using the old way to parse Relion 3.1 header
@@ -52,39 +52,39 @@ def learnstaropticsheader(infile):
 	infile.seek(0) # return to beginning of starfile before return
 	return opticsheaderlabels
 
-def writestaropticsheader(outfile,headerlabels):		  
-  """With an already opened starfile write a header"""
-  outfile.write('\ndata_optics\n\nloop_\n')
-  for label in headerlabels:
-    outfile.write(label)
+def writestaropticsheader(outfile,headerlabels):			
+	"""With an already opened starfile write a header"""
+	outfile.write('\ndata_optics\n\nloop_\n')
+	for label in headerlabels:
+		outfile.write(label)
 
 def learnstarpartheader(infile):
-   """Learn which column contains which information from an already open starfile"""
-  infile.seek(0) # Go to the beginning of the starfile
-  donepartheader = False
-  doneprelabels = False
-  partheaderlabels = []
+	 """Learn which column contains which information from an already open starfile"""
+	infile.seek(0) # Go to the beginning of the starfile
+	donepartheader = False
+	doneprelabels = False
+	partheaderlabels = []
 
-  doneprepartlabels = False
+	doneprepartlabels = False
 
-  while not doneprepartlabels:
-    line=infile.readline()
-    if line.startswith('data_particles'):
-      doneprepartlabels = True # read until data_optics
-  while not doneprelabels:
-    line=infile.readline()
-    if line.startswith('loop_'):
-      doneprelabels = True # read until 'loop_'
-  while not donepartheader:
-    line=infile.readline()
-    if not line.startswith('_'): # read all lines the start with '_'
-      donepartheader = True
-    else:
-      partheaderlabels += [line]
-  infile.seek(0) # return to beginning of starfile before return
-  return partheaderlabels
+	while not doneprepartlabels:
+		line=infile.readline()
+		if line.startswith('data_particles'):
+			doneprepartlabels = True # read until data_optics
+	while not doneprelabels:
+		line=infile.readline()
+		if line.startswith('loop_'):
+			doneprelabels = True # read until 'loop_'
+	while not donepartheader:
+		line=infile.readline()
+		if not line.startswith('_'): # read all lines the start with '_'
+			donepartheader = True
+		else:
+			partheaderlabels += [line]
+	infile.seek(0) # return to beginning of starfile before return
+	return partheaderlabels
 
-def writestarpartheader(outfile,headerlabels):		  
+def writestarpartheader(outfile,headerlabels):			
 	"""With an already opened starfile write a header"""
 	outfile.write('\ndata_particles\n\nloop_\n')
 	for label in headerlabels:
@@ -100,7 +100,7 @@ def readstarline(infile):
 def writestarline(outfile,records):
 	"""Write a record (line) to an already open starfile"""
 	for item in records:
-		outfile.write(item+'  ')
+		outfile.write(item+'	')
 	outfile.write('\n')
 
 def starcol_exact_label(starlabels, label):
@@ -123,8 +123,8 @@ if __name__=='__main__':
 	parser = argparse.ArgumentParser(description='')
 	parser.add_argument('--istar', help='Input particle star file',required=True)
 	parser.add_argument('--ostar', help='Output particle star file',required=True)
-  parser.add_argument('--holeno', help='Number of holes used for beam shift',required=True)
-  parser.add_argument('--nogroup', help='Number of optic groups',required=True)
+		parser.add_argument('--holeno', help='Number of holes used for beam shift',required=True)
+		parser.add_argument('--nogroup', help='Number of optic groups',required=True)
 	parser.add_argument('--offset', help='Add this offset to the beam tilt class',required=False, default="0")
 
 
@@ -134,9 +134,9 @@ if __name__=='__main__':
 	
 	instar = open(args.istar, 'r')
 	outstar= open(args.ostar, 'w')
-  holeno = int(args.holeno)
-  nogroup = int(args.nogroup)
-  offset = int(args.offset)
+ 	holeno = int(args.holeno)
+	nogroup = int(args.nogroup)
+	offset = int(args.offset)
 
 		
 	# Parse data_optics
@@ -164,31 +164,31 @@ if __name__=='__main__':
 	outstar.write('\n')
 	
 	# Parse data_particles
-  starlabels = learnstarpartheader(instar)
-  microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
-  partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
+	starlabels = learnstarpartheader(instar)
+	microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
+	partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
 
 	# Write particle header
-  writestarpartheader(outstar, starlabels)
+	writestarpartheader(outstar, starlabels)
 
 	print("Search pattern: {}".format(searchpattern))
-  holepattern = {}
-  opticsgroupid = 0
-  for line in instar:
-    record = line.split()
-    if len(record)==len(starlabels): # if line looks valid
-      microname=record[microcol]
-      microname = os.path.basename(microname)
-      # Get hole number & Shot number
-      m = re.search("([0-9]+)-([0-9]+).mrc$", microname, re.I)
-      holeid = int(m.group(1))
-      shotid = int(m.group(2))
-      opticsgroupid = holeno*(holeid - 1) + shotid + offset                 
-      record[partopticsgroupcol] = opticsgroupid                        
-      writestarline(outstar,record)
-                                        
-                        
-  instar.close()
-  outstar.close()
+	holepattern = {}
+	opticsgroupid = 0
+	for line in instar:
+		record = line.split()
+		if len(record)==len(starlabels): # if line looks valid
+			microname=record[microcol]
+			microname = os.path.basename(microname)
+			# Get hole number & Shot number
+			m = re.search("([0-9]+)-([0-9]+).mrc$", microname, re.I)
+			holeid = int(m.group(1))
+			shotid = int(m.group(2))
+			opticsgroupid = holeno*(holeid - 1) + shotid + offset								 
+			record[partopticsgroupcol] = opticsgroupid												
+			writestarline(outstar,record)
+																				
+												
+	instar.close()
+	outstar.close()
 
 
