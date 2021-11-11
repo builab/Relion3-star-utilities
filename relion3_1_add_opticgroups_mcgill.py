@@ -182,8 +182,7 @@ if __name__=='__main__':
 			holeid = int(m.group(1))
 			shotid = int(m.group(2))
 			opticsgroupid = holeno*(holeid - 1) + shotid + offset								 
-			record[opticsgroupnamecol]= 'opticsGroup' + str(opticsgroupid)
-			record[opticsgroupcol] = str(opticsgroupid)
+			record[partopticsgroupcol] = str(opticsgroupid)
 
 			writestarline(outstar,record)
 																				
