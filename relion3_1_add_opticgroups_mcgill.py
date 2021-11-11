@@ -53,10 +53,10 @@ def learnstaropticsheader(infile):
 	return opticsheaderlabels
 
 def writestaropticsheader(outfile,headerlabels):		  
-	"""With an already opened starfile write a header"""
-	outfile.write('\ndata_optics\n\nloop_\n')
-	for label in headerlabels:
-		outfile.write(label)
+  """With an already opened starfile write a header"""
+  outfile.write('\ndata_optics\n\nloop_\n')
+  for label in headerlabels:
+    outfile.write(label)
 
 def learnstarpartheader(infile):
    """Learn which column contains which information from an already open starfile"""
