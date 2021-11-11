@@ -171,8 +171,6 @@ if __name__=='__main__':
 	# Write particle header
 	writestarpartheader(outstar, starlabels)
 
-	print("Search pattern: {}".format(searchpattern))
-	holepattern = {}
 	opticsgroupid = 0
 	for line in instar:
 		record = line.split()
@@ -184,7 +182,9 @@ if __name__=='__main__':
 			holeid = int(m.group(1))
 			shotid = int(m.group(2))
 			opticsgroupid = holeno*(holeid - 1) + shotid + offset								 
-			record[partopticsgroupcol] = opticsgroupid												
+			record[opticsgroupnamecol]= 'opticsGroup' + str(opticsgroupid)
+			record[opticsgroupcol] = str(opticsgroupid)
+
 			writestarline(outstar,record)
 																				
 												
