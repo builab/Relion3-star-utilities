@@ -60,7 +60,7 @@ def writestaropticsheader(outfile,headerlabels):
 
 def learnstarpartheader(infile):
 	 """Learn which column contains which information from an already open starfile"""
-	infile.seek(0) # Go to the beginning of the starfile
+	infile.seek(0)
 	donepartheader = False
 	doneprelabels = False
 	partheaderlabels = []
