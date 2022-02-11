@@ -134,7 +134,7 @@ if __name__=='__main__':
 	
 	instar = open(args.istar, 'r')
 	outstar= open(args.ostar, 'w')
- 	holeno = int(args.holeno)
+	holeno = int(args.holeno)
 	nogroup = int(args.nogroup)
 	offset = int(args.offset)
 
