@@ -87,7 +87,7 @@ def learnstarpartheader(infile, isMicro):
 	infile.seek(0) # return to beginning of starfile before return
 	return partheaderlabels
 
-def writestarpartheader(outfile,headerlabels):			
+def writestarpartheader(outfile,headerlabels, isMicro):			
 	"""With an already opened starfile write a header"""
 	if isMicro < 1:
 		outfile.write('\ndata_particles\n\nloop_\n')
@@ -171,12 +171,12 @@ if __name__=='__main__':
 	outstar.write('\n')
 	
 	# Parse data_particles
-	starlabels = learnstarpartheader(instar)
+	starlabels = learnstarpartheader(instar, isMicro)
 	microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
 	partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
 
 	# Write particle header
-	writestarpartheader(outstar, starlabels)
+	writestarpartheader(outstar, starlabels, isMicro)
 
 	opticsgroupid = 0
 	for line in instar:
