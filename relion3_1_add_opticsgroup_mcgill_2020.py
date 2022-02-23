@@ -56,7 +56,7 @@ def writestaropticsheader(outfile,headerlabels):
 	for label in headerlabels:
 		outfile.write(label)
 
-def learnstarpartheader(infile):
+def learnstarpartheader(infile, isMicro):
 	"""Learn which column contains which information from an already open starfile"""
 	infile.seek(0)
 	donepartheader = False
@@ -67,8 +67,13 @@ def learnstarpartheader(infile):
 
 	while not doneprepartlabels:
 		line=infile.readline()
-		if line.startswith('data_particles'):
-			doneprepartlabels = True # read until data_optics
+		if isMicro < 1:
+			if line.startswith('data_particles'):
+				doneprepartlabels = True # read until data_optics
+		else:
+			if line.startswith('data_micrographs'):
+				doneprepartlabels = True
+
 	while not doneprelabels:
 		line=infile.readline()
 		if line.startswith('loop_'):
@@ -84,7 +89,10 @@ def learnstarpartheader(infile):
 
 def writestarpartheader(outfile,headerlabels):			
 	"""With an already opened starfile write a header"""
-	outfile.write('\ndata_particles\n\nloop_\n')
+	if isMicro < 1:
+		outfile.write('\ndata_particles\n\nloop_\n')
+	else:
+		outfile.write('\ndata_micrographs\n\nloop_\n')
 	for label in headerlabels:
 		outfile.write(label)
 
@@ -123,6 +131,8 @@ if __name__=='__main__':
 	parser.add_argument('--ostar', help='Output particle star file',required=True)
 	parser.add_argument('--nogroup', help='Number of optic groups',required=True)
 	parser.add_argument('--offset', help='Add this offset to the beam tilt class',required=False, default="0")
+	parser.add_argument('--micro', help='Micrograph or particles (1 or 0), default = true',required=False, default="1")
+
 
 
 
@@ -133,6 +143,7 @@ if __name__=='__main__':
 	outstar= open(args.ostar, 'w')
 	nogroup = int(args.nogroup)
 	offset = int(args.offset)
+	isMicro = int(args.micro)
 
 		
 	# Parse data_optics
