@@ -5,7 +5,9 @@
 Created on Sat Jun	6 17:35:42 2020
 
 WARNING: THis script is to parse the OpticsGroup for image from McGill Krios in 2019 and 2020. No hole information just number. Probably never 
-Also, this script using the old way to parse Relion 3.1 header
+Also, this script using the old way to parse Relion 3.1 header.
+
+It works for both micrographs & particles file
 
 Clone more OpticGroups to the star file based on hole name pattern
 for Polishing in group later.
