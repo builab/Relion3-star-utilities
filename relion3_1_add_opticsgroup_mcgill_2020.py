@@ -69,9 +69,8 @@ def learnstarpartheader(infile, isMicro):
 
 	while not doneprepartlabels:
 		line=infile.readline()
-		if isMicro < 1:
-			if line.startswith('data_particles') or line.startswith('data_micrographs') or line.startswidth('data_movies'):
-				doneprepartlabels = True # read until data_optics
+		if line.startswith('data_particles') or line.startswith('data_micrographs') or line.startswidth('data_movies'):
+			doneprepartlabels = True # read until data_optics
 		
 	while not doneprelabels:
 		line=infile.readline()
