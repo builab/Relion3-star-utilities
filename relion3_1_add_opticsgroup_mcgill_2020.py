@@ -183,7 +183,7 @@ if __name__=='__main__':
 	for line in instar:
 		if line.startswith('_'):
 			continue
-		record = line.split():
+		record = line.split()
 		if len(record)==len(starlabels): # if line looks valid
 			microname=record[microcol]
 			microname = os.path.basename(microname)
