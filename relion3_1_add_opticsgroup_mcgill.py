@@ -180,7 +180,7 @@ if __name__=='__main__':
 	if isMicro > 1:
 		microcol = starcol_extract_label(starlabels, '_rlnMicrographMovieName')
 	else:
-		microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
+		microcol = starcol_extract_label(starlabels, '_rlnMicrographName')
 		
 	partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
 
