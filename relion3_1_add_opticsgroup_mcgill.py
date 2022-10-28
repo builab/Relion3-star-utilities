@@ -188,6 +188,7 @@ if __name__=='__main__':
 	for line in instar:
 		record = line.split()
 		if len(record)==len(starlabels): # if line looks valid
+			print(record)
 			microname=record[microcol]
 			microname = os.path.basename(microname)
 			# Get hole number & Shot number
@@ -202,7 +203,7 @@ if __name__=='__main__':
 			shotid = int(m.group(2))
 			opticsgroupid = holeno*(holeid - 1) + shotid + offset								 
 			record[partopticsgroupcol] = str(opticsgroupid)
-
+:
 			writestarline(outstar,record)
 																				
 												
