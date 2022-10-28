@@ -174,7 +174,7 @@ if __name__=='__main__':
 	starlabels = learnstarpartheader(instar, isMicro)
 	if isMicro < 2:
 		microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
-	else
+	else:
 		microcol = starcol_exact_label(starlabels, '_rlnMicrographMovieName')
 		
 	partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
