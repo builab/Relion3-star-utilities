@@ -133,7 +133,7 @@ if __name__=='__main__':
 	parser.add_argument('--ostar', help='Output particle star file',required=True)
 	parser.add_argument('--nogroup', help='Number of optic groups',required=True)
 	parser.add_argument('--offset', help='Add this offset to the beam tilt class',required=False, default="0")
-	parser.add_argument('--micro', help='Micrograph or particles (1 or 0), default = true',required=False, default="1")
+	parser.add_argument('--micro', help='Movies, Micrograph or particles (2, 1 or 0), default = true',required=False, default="1")
 
 
 
@@ -182,12 +182,19 @@ if __name__=='__main__':
 
 	opticsgroupid = 0
 	for line in instar:
-		record = line.split()
+		if line.startswith('_'):
+			continue
+		record = line.split():
 		if len(record)==len(starlabels): # if line looks valid
 			microname=record[microcol]
 			microname = os.path.basename(microname)
 			# Get hole number & Shot number
-			m = re.search("([0-9][0-9][0-9][0-9][0-9]).mrc$", microname, re.I)
+			if isMicro < 2:
+				m = re.search("([0-9][0-9][0-9][0-9][0-9]).mrc$", microname, re.I)
+			else:
+				m = re.search("([0-9][0-9][0-9][0-9][0-9]).tif$", microname, re.I)
+		
+
 			microid = int(m.group(1))
 			opticsgroupid = microid % nogroup + 1 + offset								 
 			record[partopticsgroupcol] = str(opticsgroupid)
