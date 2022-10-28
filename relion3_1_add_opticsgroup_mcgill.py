@@ -177,7 +177,7 @@ if __name__=='__main__':
 	
 	# Parse data_particles
 	starlabels = learnstarpartheader(instar, isMicro)
-	if isMicro > 1
+	if isMicro > 1:
 		microcol = starcol_extract_label(starlabels, '_rlnMicrographMovieName')
 	else:
 		microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
