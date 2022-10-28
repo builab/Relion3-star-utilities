@@ -88,7 +88,7 @@ def learnstarpartheader(infile, isMicro):
 
 def writestarpartheader(outfile,headerlabels, isMicro):			
 	"""With an already opened starfile write a header"""
-	if isMicro < 1:
+	if isMicro == 0:
 		outfile.write('\ndata_particles\n\nloop_\n')
 	elif isMicro == 2:
 		outfile.write('\ndata_movies\n\nloop_\n')
