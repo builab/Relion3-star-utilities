@@ -196,6 +196,7 @@ if __name__=='__main__':
 			microname = os.path.basename(microname)
 			# Get hole number & Shot number
 			if isMicro < 2:
+				print microname
 				m = re.search("([0-9]+)-([0-9]+).mrc$", microname, re.I)
 			else:
 				print microname
