@@ -186,7 +186,7 @@ if __name__=='__main__':
 
 	opticsgroupid = 0
 	for line in instar:
-		if line.startwiths('_'):
+		if line.startswith('_'):
 			continue
 		record = line.split()
 		if len(record)==len(starlabels): # if line looks valid
