@@ -70,12 +70,9 @@ def learnstarpartheader(infile, isMicro):
 	while not doneprepartlabels:
 		line=infile.readline()
 		if isMicro < 1:
-			if line.startswith('data_particles'):
+			if line.startswith('data_particles') or line.startswith('data_micrographs') or line.startswidth('data_movies'):
 				doneprepartlabels = True # read until data_optics
-		else:
-			if line.startswith('data_micrographs'):
-				doneprepartlabels = True
-
+		
 	while not doneprelabels:
 		line=infile.readline()
 		if line.startswith('loop_'):
@@ -93,6 +90,8 @@ def writestarpartheader(outfile,headerlabels, isMicro):
 	"""With an already opened starfile write a header"""
 	if isMicro < 1:
 		outfile.write('\ndata_particles\n\nloop_\n')
+	elif isMicro == 2:
+		outfile.write('\ndata_movies\n\nloop_\n')
 	else:
 		outfile.write('\ndata_micrographs\n\nloop_\n')
 	for label in headerlabels:
