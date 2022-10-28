@@ -73,8 +73,9 @@ def learnstarpartheader(infile, isMicro):
 			if line.startswith('data_particles'):
 				doneprepartlabels = True # read until data_optics
 		else:
-			if line.startswith('data_micrographs'):
+			if line.startswith('data_micrographs') or line.startswith('data_movies') :
 				doneprepartlabels = True
+			
 
 	while not doneprelabels:
 		line=infile.readline()
@@ -91,10 +92,12 @@ def learnstarpartheader(infile, isMicro):
 
 def writestarpartheader(outfile,headerlabels, isMicro):			
 	"""With an already opened starfile write a header"""
-	if isMicro < 1:
+	if isMicro == 0:
 		outfile.write('\ndata_particles\n\nloop_\n')
-	else:
+	elif isMicro == 1:
 		outfile.write('\ndata_micrographs\n\nloop_\n')
+	else:
+		outfile.write('\ndata_movies\n\nloop_\n')
 	for label in headerlabels:
 		outfile.write(label)
 
@@ -133,7 +136,7 @@ if __name__=='__main__':
 	parser.add_argument('--holeno', help='Number of holes used for beam shift',required=True)
 	parser.add_argument('--nogroup', help='Number of optic groups',required=True)
 	parser.add_argument('--offset', help='Add this offset to the beam tilt class',required=False, default="0")
-	parser.add_argument('--micro', help='Micrograph or particles (1 or 0), default = true',required=False, default="1")
+	parser.add_argument('--micro', help='Movies or Micrograph or particles (2, 1 or 0)',required=False, default="1")
 
 
 
@@ -174,7 +177,11 @@ if __name__=='__main__':
 	
 	# Parse data_particles
 	starlabels = learnstarpartheader(instar, isMicro)
-	microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
+	if isMicro > 1
+		microcol = starcol_extract_label(starlabels, '_rlnMicrographMovieName')
+	else:
+		microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
+		
 	partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
 
 	# Write particle header
@@ -188,7 +195,11 @@ if __name__=='__main__':
 			microname=record[microcol]
 			microname = os.path.basename(microname)
 			# Get hole number & Shot number
-			m = re.search("([0-9]+)-([0-9]+).mrc$", microname, re.I)
+			if isMicro < 2
+				m = re.search("([0-9]+)-([0-9]+).mrc$", microname, re.I)
+			else:
+				m = re.search("([0-9]+)-([0-9]+).tif$", microname, re.I)
+				
 			holeid = int(m.group(1))
 			shotid = int(m.group(2))
 			opticsgroupid = holeno*(holeid - 1) + shotid + offset								 
