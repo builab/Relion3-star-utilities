@@ -195,7 +195,7 @@ if __name__=='__main__':
 			microname=record[microcol]
 			microname = os.path.basename(microname)
 			# Get hole number & Shot number
-			if isMicro < 2
+			if isMicro < 2:
 				m = re.search("([0-9]+)-([0-9]+).mrc$", microname, re.I)
 			else:
 				m = re.search("([0-9]+)-([0-9]+).tif$", microname, re.I)
