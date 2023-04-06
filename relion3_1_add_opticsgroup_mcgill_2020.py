@@ -69,13 +69,9 @@ def learnstarpartheader(infile, isMicro):
 
 	while not doneprepartlabels:
 		line=infile.readline()
-		if isMicro < 1:
-			if line.startswith('data_particles'):
-				doneprepartlabels = True # read until data_optics
-		else:
-			if line.startswith('data_micrographs'):
-				doneprepartlabels = True
-
+		if line.startswith('data_particles') or line.startswith('data_micrographs') or line.startswith('data_movies'):
+			doneprepartlabels = True # read until data_optics
+		
 	while not doneprelabels:
 		line=infile.readline()
 		if line.startswith('loop_'):
@@ -91,8 +87,10 @@ def learnstarpartheader(infile, isMicro):
 
 def writestarpartheader(outfile,headerlabels, isMicro):			
 	"""With an already opened starfile write a header"""
-	if isMicro < 1:
+	if isMicro == 0:
 		outfile.write('\ndata_particles\n\nloop_\n')
+	elif isMicro == 2:
+		outfile.write('\ndata_movies\n\nloop_\n')
 	else:
 		outfile.write('\ndata_micrographs\n\nloop_\n')
 	for label in headerlabels:
@@ -133,7 +131,7 @@ if __name__=='__main__':
 	parser.add_argument('--ostar', help='Output particle star file',required=True)
 	parser.add_argument('--nogroup', help='Number of optic groups',required=True)
 	parser.add_argument('--offset', help='Add this offset to the beam tilt class',required=False, default="0")
-	parser.add_argument('--micro', help='Micrograph or particles (1 or 0), default = true',required=False, default="1")
+	parser.add_argument('--micro', help='Movies, Micrograph or particles (2, 1 or 0), default = true',required=False, default="1")
 
 
 
@@ -174,7 +172,11 @@ if __name__=='__main__':
 	
 	# Parse data_particles
 	starlabels = learnstarpartheader(instar, isMicro)
-	microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
+	if isMicro < 2:
+		microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
+	else:
+		microcol = starcol_exact_label(starlabels, '_rlnMicrographMovieName')
+		
 	partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
 
 	# Write particle header
@@ -182,12 +184,19 @@ if __name__=='__main__':
 
 	opticsgroupid = 0
 	for line in instar:
+		if line.startswith('_'):
+			continue
 		record = line.split()
 		if len(record)==len(starlabels): # if line looks valid
 			microname=record[microcol]
 			microname = os.path.basename(microname)
 			# Get hole number & Shot number
-			m = re.search("([0-9][0-9][0-9][0-9][0-9]).mrc$", microname, re.I)
+			if isMicro < 2:
+				m = re.search("([0-9][0-9][0-9][0-9][0-9]).mrc$", microname, re.I)
+			else:
+				m = re.search("([0-9][0-9][0-9][0-9][0-9]).tif$", microname, re.I)
+		
+
 			microid = int(m.group(1))
 			opticsgroupid = microid % nogroup + 1 + offset								 
 			record[partopticsgroupcol] = str(opticsgroupid)
