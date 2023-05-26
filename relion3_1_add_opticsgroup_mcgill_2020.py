@@ -8,6 +8,7 @@ WARNING: THis script is to parse the OpticsGroup for image from McGill Krios in 
 Also, this script using the old way to parse Relion 3.1 header.
 
 It works for both micrographs & particles file
+Fixing problem with there is no OpticsGroup in the data_micrographs or data_particles
 
 Clone more OpticGroups to the star file based on hole name pattern
 for Polishing in group later.
@@ -178,6 +179,11 @@ if __name__=='__main__':
 		microcol = starcol_exact_label(starlabels, '_rlnMicrographMovieName')
 		
 	partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
+	if partopticsgroupcol == -1:
+		partopticsgroupcol = len(starlabels)
+	
+		
+	print("rlnOpticsGroup column %d".format(partopticsgroupcol))
 
 	# Write particle header
 	writestarpartheader(outstar, starlabels, isMicro)
