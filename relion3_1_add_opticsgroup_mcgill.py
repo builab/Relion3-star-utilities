@@ -15,6 +15,8 @@ also work for any star file.
 
 McGill Krios pattern HoleNumber_ShotNumber 
 
+For something without OpticGroups, it need to added manually
+
 (1_1) -> Class 1
 (1-4) -> Class 4
 (2-3) -> Class 7
