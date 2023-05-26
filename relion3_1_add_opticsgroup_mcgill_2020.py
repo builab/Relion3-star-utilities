@@ -181,7 +181,7 @@ if __name__=='__main__':
 	partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
 	if partopticsgroupcol == -1:
 		partopticsgroupcol = len(starlabels)
-		starlabels.append("_rlnOpticsGroups #{:d}".format(partopticsgroupcol + 1))
+		starlabels.append("_rlnOpticsGroups #{:d}\n".format(partopticsgroupcol + 1))
 	
 		
 	print("rlnOpticsGroup column {:d}".format(partopticsgroupcol))
