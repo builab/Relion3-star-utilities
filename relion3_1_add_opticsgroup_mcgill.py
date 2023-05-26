@@ -181,6 +181,13 @@ if __name__=='__main__':
 		microcol = starcol_exact_label(starlabels, '_rlnMicrographName')
 		
 	partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
+	
+	if partopticsgroupcol == -1:
+		partopticsgroupcol = len(starlabels)
+		starlabels.append("_rlnOpticsGroups #{:d}\n".format(partopticsgroupcol + 1))
+		
+	print("rlnOpticsGroup column {:d}".format(partopticsgroupcol))
+
 
 	# Write particle header
 	writestarpartheader(outstar, starlabels, isMicro)
@@ -191,7 +198,7 @@ if __name__=='__main__':
 		if line.startswith('_'):
 			continue
 		record = line.split()
-		if len(record)==len(starlabels): # if line looks valid
+		if len(record)==len(starlabels) or len(record) == len(starlabels) - 1: # if line looks valid
 			#print(record)
 			microname=record[microcol]
 			microname = os.path.basename(microname)
@@ -205,8 +212,13 @@ if __name__=='__main__':
 				
 			holeid = int(m.group(1))
 			shotid = int(m.group(2))
-			opticsgroupid = holeno*(holeid - 1) + shotid + offset								 
-			record[partopticsgroupcol] = str(opticsgroupid)
+			opticsgroupid = holeno*(holeid - 1) + shotid + offset	
+			
+			if partopticsgroupcol == len(record):
+				record.append(str(opticsgroupid))
+			else:
+				record[partopticsgroupcol] = str(opticsgroupid)
+
 			writestarline(outstar,record)
 																				
 												
