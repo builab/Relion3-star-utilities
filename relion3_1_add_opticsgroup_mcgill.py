@@ -198,7 +198,7 @@ if __name__=='__main__':
 				print(microname)
 				m = re.search("([0-9]+)-([0-9]+).mrc$", microname, re.I)
 			else:
-				print microname
+				print(microname)
 				m = re.search("([0-9]+)-([0-9]+).tif$", microname, re.I)
 				
 			holeid = int(m.group(1))
