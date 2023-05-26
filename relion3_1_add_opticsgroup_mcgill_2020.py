@@ -183,7 +183,7 @@ if __name__=='__main__':
 		partopticsgroupcol = len(starlabels)
 	
 		
-	print("rlnOpticsGroup column %d".format(partopticsgroupcol))
+	print("rlnOpticsGroup column {:d}".format(partopticsgroupcol))
 
 	# Write particle header
 	writestarpartheader(outstar, starlabels, isMicro)
@@ -204,8 +204,11 @@ if __name__=='__main__':
 		
 
 			microid = int(m.group(1))
-			opticsgroupid = microid % nogroup + 1 + offset								 
-			record[partopticsgroupcol] = str(opticsgroupid)
+			opticsgroupid = microid % nogroup + 1 + offset
+			if partopticsgroupcol == len(record):
+				record.append(str(opticsgroupid))
+			else:
+				record[partopticsgroupcol] = str(opticsgroupid)
 
 			writestarline(outstar,record)
 																				
