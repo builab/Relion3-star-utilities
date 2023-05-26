@@ -190,7 +190,7 @@ if __name__=='__main__':
 			continue
 		record = line.split()
 		if len(record)==len(starlabels): # if line looks valid
-			print(record)
+			#print(record)
 			microname=record[microcol]
 			microname = os.path.basename(microname)
 			# Get hole number & Shot number
