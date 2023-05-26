@@ -181,6 +181,7 @@ if __name__=='__main__':
 	partopticsgroupcol = starcol_exact_label(starlabels, '_rlnOpticsGroup');
 	if partopticsgroupcol == -1:
 		partopticsgroupcol = len(starlabels)
+		starlabels.append("_rlnOpticsGroups #{:d}".format(partopticsgroupcol + 1))
 	
 		
 	print("rlnOpticsGroup column {:d}".format(partopticsgroupcol))
@@ -193,7 +194,7 @@ if __name__=='__main__':
 		if line.startswith('_'):
 			continue
 		record = line.split()
-		if len(record)==len(starlabels): # if line looks valid
+		if len(record)==len(starlabels) or len(record) == len(starlabels) - 1: # if line looks valid
 			microname=record[microcol]
 			microname = os.path.basename(microname)
 			# Get hole number & Shot number
