@@ -184,7 +184,7 @@ if __name__=='__main__':
 	
 	if partopticsgroupcol == -1:
 		partopticsgroupcol = len(starlabels)
-		starlabels.append("_rlnOpticsGroups #{:d}\n".format(partopticsgroupcol + 1))
+		starlabels.append("_rlnOpticsGroup #{:d}\n".format(partopticsgroupcol + 1))
 		
 	print("rlnOpticsGroup column {:d}".format(partopticsgroupcol))
 
